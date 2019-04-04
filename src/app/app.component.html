@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <div class="py-5 text-center">
+    <img class="d-block mx-auto mb-4" src="../assets/divvyLogo.png" alt="" width="181">
+    <h2>Warehouse Item Locator</h2>
+    <p class="lead">Please enter the X and Y coordinates for your item</p>
+  </div>
+
+  <div class="col-12">
+    <!-- <form class="needs-validation" novalidate> -->
+    <div class="row mb-5">
+      <div class="col-sm-12 col-lg-4 mb-3">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">X</span>
+          </div>
+          <input type="number" [(ngModel)]="x" name="x" (ngModelChange)="getItemId()" class="form-control" max="100000"
+            min="0">
+          <div class="invalid-feedback" style="width: 100%;">
+            The x coordinate required.
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-lg-4 mb-3">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Y</span>
+          </div>
+          <input type="number" [(ngModel)]="y" name="y" (ngModelChange)="getItemId()" class="form-control" max="100000"
+            min="0">
+          <div class="invalid-feedback" style="width: 100%;">
+            The Y coordinate is required.
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="card" style="width: 25rem;">
+        <div class="card-header">
+          Result
+        </div>
+        <h1 style="text-align: center">{{itemId ? itemId : '-'}}</h1>
+      </div>
+    </div>
+
+    <!-- </form> -->
+  </div>
+</div>
