@@ -1,0 +1,7 @@
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text">{{properties.label}}</span>
+  </div>
+  <input type="number" [(ngModel)]="properties[value]" (ngModelChange)="onUpdateValue($event)" class="form-control"
+    max="100000" min="0">
+</div>

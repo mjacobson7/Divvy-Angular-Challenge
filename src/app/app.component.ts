@@ -7,21 +7,36 @@ import { Service } from './services/service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  x: number;
-  y: number;
-  itemId: string;
+  itemId = '-';
+  xProperties = {
+    label: 'X',
+    name: 'x',
+    value: null
+  };
+  yProperties = {
+    label: 'Y',
+    name: 'y',
+    value: null
+  }
 
   constructor(private service: Service) { }
 
+
+
   getItemId() {
-    if (null != this.x && null != this.y && this.x > 0 && this.y > 0) {
-      this.service.getItemId({ x: this.x, y: this.y }).subscribe(retVal => {
+    if (null != this.xProperties.value && null != this.yProperties.value && this.xProperties.value > 0 && this.yProperties.value > 0) {
+      this.service.getItemId({ x: this.xProperties.value, y: this.yProperties.value }).subscribe(retVal => {
         this.itemId = retVal;
       });
     } else {
-      this.itemId = null;
+      this.itemId = '-';
     }
 
+  }
+
+  updateValue(data) {
+    this[`${data.type}Properties`].value = data.value;
+    this.getItemId();
   }
 
 
