@@ -27,7 +27,7 @@ From project root, start the server
 node server/server.js
 ```
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Now you can visit [`localhost:3100`](http://localhost:3100) from your browser.
 
 
 ## Built With
