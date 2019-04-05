@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <div class=\"py-5 text-center\">\n    <img class=\"d-block mx-auto mb-4\" src=\"../assets/divvyLogo.png\" alt=\"\" width=\"181\">\n    <h2>Warehouse Item Locator</h2>\n    <p class=\"lead\">Please enter the X and Y coordinates for your item</p>\n  </div>\n\n  <div class=\"col-12\">\n    <!-- <form class=\"needs-validation\" novalidate> -->\n    <div class=\"row mb-5\">\n      <div class=\"col-sm-12 col-lg-4 mb-3\">\n        <div class=\"input-group\">\n          <div class=\"input-group-prepend\">\n            <span class=\"input-group-text\">X</span>\n          </div>\n          <input type=\"number\" [(ngModel)]=\"x\" name=\"x\" (ngModelChange)=\"getItemId()\" class=\"form-control\" max=\"100000\"\n            min=\"0\">\n          <div class=\"invalid-feedback\" style=\"width: 100%;\">\n            The x coordinate required.\n          </div>\n        </div>\n      </div>\n      <div class=\"col-sm-12 col-lg-4 mb-3\">\n        <div class=\"input-group\">\n          <div class=\"input-group-prepend\">\n            <span class=\"input-group-text\">Y</span>\n          </div>\n          <input type=\"number\" [(ngModel)]=\"y\" name=\"y\" (ngModelChange)=\"getItemId()\" class=\"form-control\" max=\"100000\"\n            min=\"0\">\n          <div class=\"invalid-feedback\" style=\"width: 100%;\">\n            The Y coordinate is required.\n          </div>\n        </div>\n      </div>\n    </div>\n\n\n    <div class=\"row\">\n      <div class=\"card\" style=\"width: 25rem;\">\n        <div class=\"card-header\">\n          Result\n        </div>\n        <h1 style=\"text-align: center\">{{itemId ? itemId : '-'}}</h1>\n      </div>\n    </div>\n\n    <!-- </form> -->\n  </div>\n</div>"
+module.exports = "<div class=\"container-fluid\">\n  <app-header></app-header>\n  <div class=\"col-12\">\n    <div class=\"row mb-5\" style=\"justify-content: center;\">\n      <div class=\"col-sm-12 col-lg-4 mb-3\">\n        <app-input (updateValue)=\"updateValue($event)\" [properties]=\"xProperties\"></app-input>\n      </div>\n      <div class=\"col-sm-12 col-lg-4 mb-3\">\n        <app-input (updateValue)=\"updateValue($event)\" [properties]=\"yProperties\"></app-input>\n      </div>\n    </div>\n    <app-result [itemId]=\"itemId\"></app-result>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -41,7 +41,7 @@ module.exports = "<div class=\"container-fluid\">\n  <div class=\"py-5 text-cent
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".row {\n  justify-content: center; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9tYXhqYWNvYnNvbi9Qcm9qZWN0cy9kaXZ2eS1hbmd1bGFyLWNoYWxsZW5nZS9zcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLHVCQUF1QixFQUFBIiwiZmlsZSI6ImFwcC9hcHAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIucm93IHtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbn0iXX0= */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAvYXBwLmNvbXBvbmVudC5zY3NzIn0= */"
 
 /***/ }),
 
@@ -64,6 +64,17 @@ __webpack_require__.r(__webpack_exports__);
 var AppComponent = /** @class */ (function () {
     function AppComponent(service) {
         this.service = service;
+        this.itemId = '-';
+        this.xProperties = {
+            label: 'X',
+            name: 'x',
+            value: null
+        };
+        this.yProperties = {
+            label: 'Y',
+            name: 'y',
+            value: null
+        };
     }
     AppComponent.prototype.getItemId = function () {
         var _this = this;
@@ -73,8 +84,12 @@ var AppComponent = /** @class */ (function () {
             });
         }
         else {
-            this.itemId = null;
+            this.itemId = '-';
         }
+    };
+    AppComponent.prototype.updateValue = function (data) {
+        this[data.type] = data.value;
+        this.getItemId();
     };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -109,6 +124,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _services_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./services/service */ "./src/app/services/service.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./header/header.component */ "./src/app/header/header.component.ts");
+/* harmony import */ var _input_input_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./input/input.component */ "./src/app/input/input.component.ts");
+/* harmony import */ var _result_result_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./result/result.component */ "./src/app/result/result.component.ts");
+
+
+
 
 
 
@@ -123,7 +144,10 @@ var AppModule = /** @class */ (function () {
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
+                _header_header_component__WEBPACK_IMPORTED_MODULE_8__["HeaderComponent"],
+                _input_input_component__WEBPACK_IMPORTED_MODULE_9__["InputComponent"],
+                _result_result_component__WEBPACK_IMPORTED_MODULE_10__["ResultComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -136,6 +160,190 @@ var AppModule = /** @class */ (function () {
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/header/header.component.html":
+/*!**********************************************!*\
+  !*** ./src/app/header/header.component.html ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"py-5 text-center\">\n  <img class=\"d-block mx-auto mb-4\" src=\"../assets/divvyLogo.png\" alt=\"\" width=\"181\">\n  <h2>Warehouse Item Locator</h2>\n  <p class=\"lead\">Please enter the X and Y coordinates for your item</p>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/header/header.component.sass":
+/*!**********************************************!*\
+  !*** ./src/app/header/header.component.sass ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAvaGVhZGVyL2hlYWRlci5jb21wb25lbnQuc2FzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/header/header.component.ts":
+/*!********************************************!*\
+  !*** ./src/app/header/header.component.ts ***!
+  \********************************************/
+/*! exports provided: HeaderComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderComponent", function() { return HeaderComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var HeaderComponent = /** @class */ (function () {
+    function HeaderComponent() {
+    }
+    HeaderComponent.prototype.ngOnInit = function () {
+    };
+    HeaderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-header',
+            template: __webpack_require__(/*! ./header.component.html */ "./src/app/header/header.component.html"),
+            styles: [__webpack_require__(/*! ./header.component.sass */ "./src/app/header/header.component.sass")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], HeaderComponent);
+    return HeaderComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/input/input.component.html":
+/*!********************************************!*\
+  !*** ./src/app/input/input.component.html ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"input-group\">\n  <div class=\"input-group-prepend\">\n    <span class=\"input-group-text\">{{properties.label}}</span>\n  </div>\n  <input type=\"number\" [(ngModel)]=\"properties[value]\" (ngModelChange)=\"onUpdateValue($event)\" class=\"form-control\"\n    max=\"100000\" min=\"0\">\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/input/input.component.sass":
+/*!********************************************!*\
+  !*** ./src/app/input/input.component.sass ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAvaW5wdXQvaW5wdXQuY29tcG9uZW50LnNhc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/input/input.component.ts":
+/*!******************************************!*\
+  !*** ./src/app/input/input.component.ts ***!
+  \******************************************/
+/*! exports provided: InputComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InputComponent", function() { return InputComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var InputComponent = /** @class */ (function () {
+    function InputComponent() {
+        this.updateValue = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+    }
+    InputComponent.prototype.ngOnInit = function () {
+    };
+    InputComponent.prototype.onUpdateValue = function (val) {
+        this.updateValue.emit({ type: this.properties.name, value: val });
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+    ], InputComponent.prototype, "properties", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"])
+    ], InputComponent.prototype, "updateValue", void 0);
+    InputComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-input',
+            template: __webpack_require__(/*! ./input.component.html */ "./src/app/input/input.component.html"),
+            styles: [__webpack_require__(/*! ./input.component.sass */ "./src/app/input/input.component.sass")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], InputComponent);
+    return InputComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/result/result.component.html":
+/*!**********************************************!*\
+  !*** ./src/app/result/result.component.html ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\" style=\"justify-content: center\">\n  <div class=\"card\" style=\"width: 25rem;\">\n    <div class=\"card-header\">\n      Item ID\n    </div>\n    <h1 style=\"text-align: center\">{{itemId}}</h1>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/result/result.component.sass":
+/*!**********************************************!*\
+  !*** ./src/app/result/result.component.sass ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAvcmVzdWx0L3Jlc3VsdC5jb21wb25lbnQuc2FzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/result/result.component.ts":
+/*!********************************************!*\
+  !*** ./src/app/result/result.component.ts ***!
+  \********************************************/
+/*! exports provided: ResultComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResultComponent", function() { return ResultComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var ResultComponent = /** @class */ (function () {
+    function ResultComponent() {
+    }
+    ResultComponent.prototype.ngOnInit = function () {
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", String)
+    ], ResultComponent.prototype, "itemId", void 0);
+    ResultComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-result',
+            template: __webpack_require__(/*! ./result.component.html */ "./src/app/result/result.component.html"),
+            styles: [__webpack_require__(/*! ./result.component.sass */ "./src/app/result/result.component.sass")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], ResultComponent);
+    return ResultComponent;
 }());
 
 
